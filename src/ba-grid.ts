@@ -9,11 +9,17 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('ba-grid')
 export class BAGrid extends LitElement {
-  constructor() {
-    super();
+  /**
+   * The number of times the button has been clicked.
+   */
+  @property({ type: Boolean })
+  dialogOpen = false;
+  // constructor() {
+  //   super();
+  //   this.dialogOpen = false;
 
-    // this.showNumbers = false;
-  }
+  //   // this.showNumbers = false;
+  // }
 
   static get properties() {
     return {
@@ -25,7 +31,16 @@ export class BAGrid extends LitElement {
     };
   }
 
+  private _handleClick = () => {
+    this.dialogOpen = !this.dialogOpen;
+  };
+
+  private _closeDialog = () => {
+    this.dialogOpen = false;
+  };
+
   render() {
+    console.log(this.dialogOpen);
     return html`
       <div style="--columns: ${this.columns}">
         ${[...new Array(this.columns)].map((_, index) => {
@@ -33,6 +48,19 @@ export class BAGrid extends LitElement {
             this.showNumbers ? index + 1 : html`&nbsp;`
           }</div>`;
         })}
+
+        ${
+          this.showControls &&
+          html`<button class="toggle" @click="${this._handleClick}">Toggle Dialog</button>`
+        }
+
+        ${
+          this.showControls && this.dialogOpen
+            ? html`<dialog open><p>Controls</p>
+            
+            <button @click="${this._closeDialog}">Close</button></dialog>`
+            : null
+        }
       </div>
     `;
   }
@@ -53,6 +81,20 @@ export class BAGrid extends LitElement {
     :host > div > div {
       background: rgb(255 0 255 / 0.05);
       text-align: center;
+    }
+
+    .toggle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    dialog {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 90%;
+      height: 90%;
     }
   `;
 }
