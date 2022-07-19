@@ -27,7 +27,7 @@ export class BAGrid extends LitElement {
       showControls: { type: Boolean },
       // data: { attribute: false },
       // items: {},
-      columns: { type: Number },
+      columns: { type: Number, reflect: true },
     };
   }
 
@@ -39,8 +39,13 @@ export class BAGrid extends LitElement {
     this.dialogOpen = false;
   };
 
+  private _handleInputChange = (e) => {
+    console.log(e.target.value);
+    this.columns = Number(e.target.value);
+  };
+
   render() {
-    console.log(this.dialogOpen);
+    console.log(this.columns);
     return html`
       <div style="--columns: ${this.columns}">
         ${[...new Array(this.columns)].map((_, index) => {
@@ -57,6 +62,8 @@ export class BAGrid extends LitElement {
         ${
           this.showControls && this.dialogOpen
             ? html`<dialog open><p>Controls</p>
+            Columns: ${this.columns}
+            <input type="range" value="3" min="3" max="18" @change=${this._handleInputChange}/>
             
             <button @click="${this._closeDialog}">Close</button></dialog>`
             : null
