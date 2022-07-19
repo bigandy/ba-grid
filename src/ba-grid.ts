@@ -91,10 +91,17 @@ export class BAGrid extends LitElement {
 
     dialog {
       position: absolute;
-      top: 0;
+      top: 3%;
       left: 0;
       width: 90%;
       height: 90%;
+      border-width: 1px;
+    }
+
+    dialog button {
+      position: absolute; 
+      top: 1rem;
+      right: 1rem;
     }
   `;
 }
