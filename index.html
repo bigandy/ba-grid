@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Lit + TS</title>
+    <link rel="stylesheet" href="./src/index.css" />
+    <script type="module" src="/src/my-element.ts"></script>
+    <script type="module" src="/src/ba-grid.ts"></script>
+  </head>
+  <body>
+    <main>
+      <div>
+        <h1>Here is the Left Column</h1>
+        <ba-grid columns="4" showControls></ba-grid>
+      </div>
+      <aside>
+        <h2>Here is the Aside</h2>
+        <ba-grid columns="2" showNumbers></ba-grid>
+      </aside>
+    </main>
+  </body>
+</html>
